@@ -1,0 +1,19 @@
+body {
+  font-family: sans-serif;
+}
+
+form {
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  margin: 35px auto 0;
+}
+
+form h1 {
+  text-align: center;
+}
+
+form > * {
+  padding: 7px 10px;
+  margin: 5px 0;
+}
