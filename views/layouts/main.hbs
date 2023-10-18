@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pigeon Post</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <header class="row justify-between align-center">
+    <a href="/">
+      <h3>Pigeon Post</h3>
+    </a>
+
+    <nav class="row align-center">
+      {{#if user}}
+        <p>Welcome, {{user.email}}</p>
+        <a href="/coo">Post a Coo</a>
+        <a href="/auth/logout">Log Out</a>
+      {{else}}
+        <a href="/register">Register</a>
+        <span>or</span>
+        <a href="/login">Login</a>
+      {{/if}}
+    </nav>
+  </header>
+
+  {{{body}}}
+</body>
+
+</html>

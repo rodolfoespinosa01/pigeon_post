@@ -1,22 +1,24 @@
 // Import Model and DataTypes from sequelize
 const { Model, DataTypes } = require('sequelize');
-// const db = require('../config/connection');
-
 const db = require('../config/connection');
 
-// Create a User class and extend the Model class
+const { hash, compare } = require('bcrypt');
 
+const Coo = require('./Coo');
+
+// Create a User class and extend the Model class
 class User extends Model { }
 
-// Call User.init and setup a couple colums/fields - email  & password as text strings
-
+// Call User.init and setup a couple columns/fields - email & password as text strings
 User.init({
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
+    unique: {
+      args: true,
+      msg: 'That email address is already in use.'
+    },
     validate: {
-      len: [6, 255],
       isEmail: true
     }
   },
@@ -24,14 +26,33 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      len: [6, 255] // Minimum length of 6 characters
+      len: {
+        args: 6,
+        msg: 'Your password must be at least 6 characters in length.'
+      }
     }
   }
-},  {
-  sequelize: db,
+}, {
   modelName: 'user',
-  // freezeTableName: true
+  // Connection object
+  sequelize: db,
+  hooks: {
+    async beforeCreate(user) {
+      user.password = await hash(user.password, 10);
+
+      return user;
+    }
+  }
 });
+
+User.prototype.validatePass = async function (form_password) {
+  const is_valid = await compare(form_password, this.password);
+
+  return is_valid;
+}
+
+User.hasMany(Coo, { as: 'coos', foreignKey: 'author_id' });
+Coo.belongsTo(User, { as: 'author', foreignKey: 'author_id' });
 
 // Export the User model
 module.exports = User;

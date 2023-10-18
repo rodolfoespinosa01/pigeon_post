@@ -1,5 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: sans-serif;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.row, .column {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+header {
+  background: #555;
+  color: #fff;
+  padding: 8px 5%;
+  margin-bottom: 35px;
+}
+
+header nav > *:not(:last-child) {
+  margin-right: 5px;
 }
 
 form {
@@ -11,6 +57,10 @@ form {
 
 form h1 {
   text-align: center;
+}
+
+form p.error {
+  color: red;
 }
 
 form > * {
