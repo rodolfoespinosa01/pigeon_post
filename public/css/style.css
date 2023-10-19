@@ -67,3 +67,19 @@ form > * {
   padding: 7px 10px;
   margin: 5px 0;
 }
+
+.coo-output {
+  margin-top: 30px;
+}
+
+.coo {
+  margin-bottom: 15px;
+}
+
+.coo h3 {
+  margin-bottom: 15px;
+}
+
+.coo p:first-child {
+  margin-right: 25px;
+}

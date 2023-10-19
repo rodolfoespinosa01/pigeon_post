@@ -1,6 +1,7 @@
 // Create an express router instance object
 const router = require('express').Router();
 const User = require('../models/User');
+const Coo = require('../models/Coo');
 
 // Block an auth page if user is already logged in
 function isLoggedIn(req, res, next) {
@@ -37,7 +38,17 @@ async function authenticate(req, res, next) {
 
 // Add one test GET route at root - localhost:3333/
 router.get('/', authenticate, async (req, res) => {
-  res.render('landing', { user: req.user });
+  const coos = await Coo.findAll({
+    include: {
+      model: User,
+      as: 'author'
+    }
+  });
+
+  res.render('landing', {
+    user: req.user,
+    coos: coos.map(c => c.get({ plain: true }))
+  });
 });
 
 // GET route to show the register form

@@ -1,1 +1,15 @@
-<h1>Pigeon Post</h1>
+<h1 class="text-center">The Coop</h1>
+
+<section class="column align-center">
+
+{{#each coos}}
+<div class="coo">
+  <h3 class="text-center">{{text}}</h3>
+  <div class="row">
+    <p>Added On: {{date}}</p>
+    <p>Author: {{author.email}}</p>
+  </div>
+</div>
+{{/each}}
+
+</section>
